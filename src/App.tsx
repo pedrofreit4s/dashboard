@@ -1,34 +1,94 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from "react";
+import { Input } from "./shared/components/Input";
+import { Lock } from "phosphor-react";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export function App() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <img
+            className="mx-auto h-12 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt="Your Company"
+          />
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            Bem-vindo ao JURID
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Acesse a sua conta
+            {/* <a
+              href="#"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              start your 14-day free trial
+            </a> */}
+          </p>
+        </div>
+        <form className="mt-8 space-y-6" action="#" method="POST">
+          <input type="hidden" name="remember" defaultValue="true" />
+          <div className="-space-y-px rounded-md shadow-sm">
+            <Input
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              placeholder="Endereço de e-mail"
+              label="Endereço de e-mail"
+              customClassName="rounded-none rounded-t-md"
+            />
 
-export default App
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              placeholder="Sua senha"
+              label="Sua senha"
+              customClassName="rounded-none rounded-b-md"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-900"
+              >
+                Lembrar de mim
+              </label>
+            </div>
+
+            <div className="text-sm">
+              <a
+                href="#"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
+                Esqueceu a sua senha?
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                <Lock size={18} />
+              </span>
+              Acessar plataforma
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
