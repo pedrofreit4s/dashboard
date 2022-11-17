@@ -1,0 +1,113 @@
+import React from "react";
+import {
+  CaretDown,
+  MagnifyingGlass,
+  Stack,
+  Smiley,
+  Archive,
+  Users,
+  Coin,
+  Receipt,
+  Car,
+  Cube,
+  HourglassSimpleHigh,
+  ShieldCheck,
+  Buildings,
+  Bug,
+  SignOut,
+} from "phosphor-react";
+
+export function Sidebar() {
+  return (
+    <div className="w-[320px] h-screen fixed bg-white border-r border-r-black/5 overflow-y-auto">
+      <div className="px-5 py-5">
+        <h2 className="text-indigo-600 font-bold text-xl text-center">
+          JURID
+          <span className="text-black/50 font-medium text-md">/control</span>
+        </h2>
+      </div>
+      <div className="px-5 py-5 relative">
+        <div className="absolute z-10 top-[32px] left-9 text-gray-400">
+          <MagnifyingGlass size={20} weight="bold" />
+        </div>
+        <input
+          type="text"
+          className="relative block w-full bg-gray-300/20 border-black/5 border-2 appearance-none rounded-md px-3 pl-12 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          placeholder="Buscar.."
+        />
+      </div>
+
+      <ul className="px-5 py-4 pt-2 border-b border-b-black/5">
+        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md px-4 bg-black/5 text-black">
+          <Stack size={20} weight="bold" /> Simular algo
+        </li>
+        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-al px-4">
+          <Archive size={20} weight="bold" /> Minhas simulações
+        </li>
+        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all px-4">
+          <Smiley size={20} weight="bold" /> Meus clientes
+        </li>
+      </ul>
+      <div className="px-5 py-4 pt-6">
+        <h5 className="font-work uppercase text-1sm font-semibold text-black/50">
+          tabelas
+        </h5>
+        <ul className="px-5 py-4 pt-2">
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md text-black">
+            <Users size={20} weight="bold" /> Usuários
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-al">
+            <Coin size={20} weight="bold" /> Moedas
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+            <Receipt size={20} weight="bold" /> Regime tributário
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+            <Cube size={20} weight="bold" /> Objetivas
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+            <HourglassSimpleHigh size={20} weight="bold" /> Tipo de estimativa
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+            <ShieldCheck size={20} weight="bold" /> Seguros
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+            <Bug size={20} weight="bold" /> Incoterms
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+            <Car size={20} weight="bold" /> ICMS
+          </li>
+          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+            <Buildings size={20} weight="bold" /> UFs
+          </li>
+        </ul>
+      </div>
+
+      <div className="w-full px-5 py-5 absolute bottom-0 border-t border-t-black/5">
+        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-4 last:mb-0 cursor-pointer transition-all rounded-md text-red-500">
+          <SignOut size={20} weight="duotone" /> Sair da conta
+        </li>
+        <div className="flex justify-between items-center select-none cursor-pointer">
+          <div className=" flex items-center gap-4">
+            <div className="w-[50px] h-[50px] overflow-hidden rounded-lg">
+              <img
+                src={`https://avatars.dicebear.com/api/adventurer-neutral/pedro.svg`}
+                alt={"Pedro"}
+                className="w-full h-full"
+              />
+            </div>
+            <div>
+              <h3 className="text-lg font-work font-semibold">Pedro Freitas</h3>
+              <p className="text-work text-sm text-black/40 mt-[-5px]">
+                pedro@introti.com
+              </p>
+            </div>
+          </div>
+          <div className="text-black/60 ">
+            <CaretDown size={20} weight="bold" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
