@@ -1,8 +1,32 @@
 import React from "react";
 import { Input } from "../shared/components/Input";
 import { Lock } from "phosphor-react";
+import { useForm } from "react-hook-form";
+import { api } from "../shared/services/api";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export function AuthenticatePage() {
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
+  async function onSubmit({ email, password }: any) {
+    try {
+      const { data } = await api.post("/sessions", { email, password });
+
+      localStorage.setItem("session.token", data.token);
+      api.defaults.headers["Authorization"] = `Bearer ${data.token}`;
+
+      navigate("/controle/usuarios");
+    } catch (error: any) {
+      Swal.fire({
+        title: "Erro!",
+        text: error.response.data.message,
+        icon: "error",
+      });
+    }
+  }
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -25,28 +49,29 @@ export function AuthenticatePage() {
             </a> */}
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" defaultValue="true" />
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="-space-y-px rounded-md shadow-sm">
             <Input
-              name="email"
               type="email"
+              name="email"
               autoComplete="email"
               required
               placeholder="Endereço de e-mail"
               label="Endereço de e-mail"
               customClassName="rounded-none rounded-t-md"
+              register={register}
             />
 
             <Input
               id="password"
-              name="password"
-              type="password"
               autoComplete="current-password"
+              type="password"
+              name="password"
               required
               placeholder="Sua senha"
               label="Sua senha"
               customClassName="rounded-none rounded-b-md"
+              register={register}
             />
           </div>
 
@@ -54,7 +79,7 @@ export function AuthenticatePage() {
             <div className="flex items-center">
               <input
                 id="remember-me"
-                name="remember-me"
+                {...register("remember")}
                 type="checkbox"
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               />

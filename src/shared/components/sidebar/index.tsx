@@ -16,8 +16,14 @@ import {
   Bug,
   SignOut,
 } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export function Sidebar() {
+  const navigate = useNavigate();
+
+  const { account, signOut } = useAuth();
+
   return (
     <div className="w-[320px] h-screen fixed bg-white border-r border-r-black/5 overflow-y-auto">
       <div className="px-5 py-5">
@@ -53,10 +59,16 @@ export function Sidebar() {
           tabelas
         </h5>
         <ul className="px-5 py-4 pt-2">
-          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md text-black">
+          <li
+            onClick={() => navigate("/controle/usuarios")}
+            className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md text-black"
+          >
             <Users size={20} weight="bold" /> Usuários
           </li>
-          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-al">
+          <li
+            onClick={() => navigate("/controle/moedas")}
+            className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-al"
+          >
             <Coin size={20} weight="bold" /> Moedas
           </li>
           <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
@@ -84,22 +96,27 @@ export function Sidebar() {
       </div>
 
       <div className="w-full px-5 py-5 absolute bottom-0 border-t border-t-black/5">
-        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-4 last:mb-0 cursor-pointer transition-all rounded-md text-red-500">
+        <li
+          onClick={signOut}
+          className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-4 last:mb-0 cursor-pointer transition-all rounded-md text-red-500"
+        >
           <SignOut size={20} weight="duotone" /> Sair da conta
         </li>
         <div className="flex justify-between items-center select-none cursor-pointer">
           <div className=" flex items-center gap-4">
             <div className="w-[50px] h-[50px] overflow-hidden rounded-lg">
               <img
-                src={`https://avatars.dicebear.com/api/adventurer-neutral/pedro.svg`}
-                alt={"Pedro"}
+                src={`https://avatars.dicebear.com/api/adventurer-neutral/${account?.name}.svg`}
+                alt={account?.name || "Pedro"}
                 className="w-full h-full"
               />
             </div>
             <div>
-              <h3 className="text-lg font-work font-semibold">Pedro Freitas</h3>
+              <h3 className="text-lg font-work font-semibold">
+                {account?.name}
+              </h3>
               <p className="text-work text-sm text-black/40 mt-[-5px]">
-                pedro@introti.com
+                {account?.email}
               </p>
             </div>
           </div>

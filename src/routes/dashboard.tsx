@@ -2,6 +2,7 @@ import React from "react";
 import { createHashRouter } from "react-router-dom";
 import { AuthenticatePage } from "../pages/auth";
 import { AccountsPage } from "../pages/control/accounts";
+import { CoinsPage } from "../pages/control/coins";
 import { ControlLayout } from "../shared/layouts/ControlLayout";
 
 const dashboardRoutes = createHashRouter([
@@ -10,12 +11,16 @@ const dashboardRoutes = createHashRouter([
     element: <AuthenticatePage />,
   },
   {
-    path: "/control",
+    path: "/controle",
     element: <ControlLayout />,
     children: [
       {
-        path: "accounts",
+        path: "usuarios",
         element: <AccountsPage />,
+      },
+      {
+        path: "moedas",
+        element: <CoinsPage />,
       },
     ],
   },
