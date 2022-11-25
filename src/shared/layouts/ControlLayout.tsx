@@ -6,9 +6,9 @@ import { AuthProvider } from "../context/AuthContext";
 export function ControlLayout() {
   return (
     <AuthProvider>
-      <div className="">
+      <div className="flex">
         <Sidebar />
-        <div>
+        <div className="w-full pl-[320px]">
           <Outlet />
         </div>
       </div>

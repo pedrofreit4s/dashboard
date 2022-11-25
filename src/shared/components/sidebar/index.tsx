@@ -27,7 +27,7 @@ export function Sidebar() {
   return (
     <div className="w-[320px] h-screen fixed bg-white border-r border-r-black/5 overflow-y-auto">
       <div className="px-5 py-5">
-        <h2 className="text-indigo-600 font-bold text-xl text-center">
+        <h2 className="text-primary font-bold text-xl text-center">
           JURID
           <span className="text-black/50 font-medium text-md">/control</span>
         </h2>
