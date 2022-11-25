@@ -4,12 +4,16 @@ import { Container } from "../../../shared/components/container";
 import { Trash, Pencil } from "phosphor-react";
 import { IAccount } from "../../../shared/interfaces/IAccount";
 import { api } from "../../../shared/services/api";
-import { format } from "date-fns";
+import { UserModal } from "../../../modals/users";
+import { AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
 
 export function AccountsPage() {
   const [users, setUsers] = useState<IAccount[]>([]);
+  const [user, setUser] = useState<IAccount | undefined>(undefined);
+
   const [isLoading, setIsLoading] = useState(true);
+  const [userModalIsOpen, setUserModalIsOpen] = useState(false);
 
   useEffect(() => {
     loadUsers();
@@ -45,8 +49,17 @@ export function AccountsPage() {
     });
   }
 
+  const closeModal = () => {
+    loadUsers();
+    setUser(undefined);
+    setUserModalIsOpen(false);
+  };
+
   return (
     <Container>
+      <AnimatePresence initial={false}>
+        {userModalIsOpen && <UserModal closeModal={closeModal} user={user} />}
+      </AnimatePresence>
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-black/90 font-work font-bold text-xl">
@@ -56,7 +69,9 @@ export function AccountsPage() {
             administre todos os usuários do sistema
           </p>
         </div>
-        <Button type="button">Criar usuário</Button>
+        <Button type="button" onClick={() => setUserModalIsOpen(true)}>
+          Criar usuário
+        </Button>
       </div>
       <div
         className={`mt-14 rounded-lg border-black/5 ${
@@ -124,6 +139,10 @@ export function AccountsPage() {
                       <Pencil
                         size={22}
                         className="text-primary cursor-pointer"
+                        onClick={() => {
+                          setUser(user);
+                          setUserModalIsOpen(true);
+                        }}
                       />
                     </div>
                   </td>
