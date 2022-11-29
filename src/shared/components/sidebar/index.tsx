@@ -16,11 +16,12 @@ import {
   Bug,
   SignOut,
 } from "phosphor-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export function Sidebar() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const { account, signOut } = useAuth();
 
@@ -61,13 +62,17 @@ export function Sidebar() {
         <ul className="px-5 py-4 pt-2">
           <li
             onClick={() => navigate("/controle/usuarios")}
-            className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md text-black"
+            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+              pathname === "/controle/usuarios" && "text-black"
+            } `}
           >
             <Users size={20} weight="bold" /> Usuários
           </li>
           <li
             onClick={() => navigate("/controle/moedas")}
-            className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-al"
+            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+              pathname === "/controle/moedas" && "text-black"
+            } `}
           >
             <Coin size={20} weight="bold" /> Moedas
           </li>
