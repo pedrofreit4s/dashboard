@@ -3,6 +3,7 @@ import { createHashRouter } from "react-router-dom";
 import { AuthenticatePage } from "../pages/auth";
 import { AccountsPage } from "../pages/control/accounts";
 import { CoinsPage } from "../pages/control/coins";
+import { TaxRegimePage } from "../pages/control/tax-regime";
 import { ControlLayout } from "../shared/layouts/ControlLayout";
 
 const dashboardRoutes = createHashRouter([
@@ -20,6 +21,14 @@ const dashboardRoutes = createHashRouter([
       },
       {
         path: "moedas",
+        element: <CoinsPage />,
+      },
+      {
+        path: "regime-tributario",
+        element: <TaxRegimePage />,
+      },
+      {
+        path: "icms",
         element: <CoinsPage />,
       },
     ],

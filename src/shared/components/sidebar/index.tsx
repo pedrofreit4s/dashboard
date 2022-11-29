@@ -76,7 +76,12 @@ export function Sidebar() {
           >
             <Coin size={20} weight="bold" /> Moedas
           </li>
-          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+          <li
+            onClick={() => navigate("/controle/regime-tributario")}
+            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+              pathname === "/controle/regime-tributario" && "text-black"
+            } `}
+          >
             <Receipt size={20} weight="bold" /> Regime tributário
           </li>
           <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
