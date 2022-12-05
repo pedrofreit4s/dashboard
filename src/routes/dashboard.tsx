@@ -5,6 +5,7 @@ import { AccountsPage } from "../pages/control/accounts";
 import { CoinsPage } from "../pages/control/coins";
 import { ObjectivesPage } from "../pages/control/objectives";
 import { TaxRegimePage } from "../pages/control/tax-regime";
+import { TypeOfEstimatePage } from "../pages/control/type-of-estimate";
 import { ControlLayout } from "../shared/layouts/ControlLayout";
 
 const dashboardRoutes = createHashRouter([
@@ -31,6 +32,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "objetivas",
         element: <ObjectivesPage />,
+      },
+      {
+        path: "tipo-de-estimativa",
+        element: <TypeOfEstimatePage />,
       },
       {
         path: "icms",

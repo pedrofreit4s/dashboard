@@ -92,7 +92,12 @@ export function Sidebar() {
           >
             <Cube size={20} weight="bold" /> Objetivas
           </li>
-          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+          <li
+            onClick={() => navigate("/controle/tipo-de-estimativa")}
+            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+              pathname === "/controle/tipo-de-estimativa" && "text-black"
+            } `}
+          >
             <HourglassSimpleHigh size={20} weight="bold" /> Tipo de estimativa
           </li>
           <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
