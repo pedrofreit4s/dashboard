@@ -100,7 +100,12 @@ export function Sidebar() {
           >
             <HourglassSimpleHigh size={20} weight="bold" /> Tipo de estimativa
           </li>
-          <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">
+          <li
+            onClick={() => navigate("/controle/seguros")}
+            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+              pathname === "/controle/seguros" && "text-black"
+            } `}
+          >
             <ShieldCheck size={20} weight="bold" /> Seguros
           </li>
           <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all">

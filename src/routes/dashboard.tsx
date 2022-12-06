@@ -4,6 +4,7 @@ import { AuthenticatePage } from "../pages/auth";
 import { AccountsPage } from "../pages/control/accounts";
 import { CoinsPage } from "../pages/control/coins";
 import { ObjectivesPage } from "../pages/control/objectives";
+import { SafesPage } from "../pages/control/safes";
 import { TaxRegimePage } from "../pages/control/tax-regime";
 import { TypeOfEstimatePage } from "../pages/control/type-of-estimate";
 import { ControlLayout } from "../shared/layouts/ControlLayout";
@@ -36,6 +37,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "tipo-de-estimativa",
         element: <TypeOfEstimatePage />,
+      },
+      {
+        path: "seguros",
+        element: <SafesPage />,
       },
       {
         path: "icms",
