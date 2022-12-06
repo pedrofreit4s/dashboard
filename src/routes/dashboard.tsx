@@ -3,6 +3,7 @@ import { createHashRouter } from "react-router-dom";
 import { AuthenticatePage } from "../pages/auth";
 import { AccountsPage } from "../pages/control/accounts";
 import { CoinsPage } from "../pages/control/coins";
+import { IncotermsPage } from "../pages/control/incoterms";
 import { ObjectivesPage } from "../pages/control/objectives";
 import { SafesPage } from "../pages/control/safes";
 import { TaxRegimePage } from "../pages/control/tax-regime";
@@ -41,6 +42,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "seguros",
         element: <SafesPage />,
+      },
+      {
+        path: "incoterms",
+        element: <IncotermsPage />,
       },
       {
         path: "icms",
