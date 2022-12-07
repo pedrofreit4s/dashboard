@@ -55,113 +55,115 @@ export function Sidebar() {
           <Smiley size={20} weight="bold" /> Meus clientes
         </li>
       </ul>
-      <div className="px-5 py-4 pt-6">
-        <h5 className="font-work uppercase text-1sm font-semibold text-black/50">
-          tabelas
-        </h5>
-        <ul className="px-5 py-4 pt-2">
-          <li
-            onClick={() => navigate("/controle/usuarios")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/usuarios" && "text-black"
-            } `}
-          >
-            <Users size={20} weight="bold" /> Usuários
-          </li>
-          <li
-            onClick={() => navigate("/controle/moedas")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/moedas" && "text-black"
-            } `}
-          >
-            <Coin size={20} weight="bold" /> Moedas
-          </li>
-          <li
-            onClick={() => navigate("/controle/regime-tributario")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/regime-tributario" && "text-black"
-            } `}
-          >
-            <Receipt size={20} weight="bold" /> Regime tributário
-          </li>
-          <li
-            onClick={() => navigate("/controle/objetivas")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/objetivas" && "text-black"
-            } `}
-          >
-            <Cube size={20} weight="bold" /> Objetivas
-          </li>
-          <li
-            onClick={() => navigate("/controle/tipo-de-estimativa")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/tipo-de-estimativa" && "text-black"
-            } `}
-          >
-            <HourglassSimpleHigh size={20} weight="bold" /> Tipo de estimativa
-          </li>
-          <li
-            onClick={() => navigate("/controle/seguros")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/seguros" && "text-black"
-            } `}
-          >
-            <ShieldCheck size={20} weight="bold" /> Seguros
-          </li>
-          <li
-            onClick={() => navigate("/controle/incoterms")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/incoterms" && "text-black"
-            } `}
-          >
-            <Bug size={20} weight="bold" /> Incoterms
-          </li>
-          <li
-            onClick={() => navigate("/controle/icms")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/icms" && "text-black"
-            } `}
-          >
-            <Car size={20} weight="bold" /> ICMS
-          </li>
-          <li
-            onClick={() => navigate("/controle/ufs")}
-            className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-              pathname === "/controle/ufs" && "text-black"
-            } `}
-          >
-            <Buildings size={20} weight="bold" /> UFs
-          </li>
-        </ul>
-      </div>
+      <div className="relative">
+        <div className="px-5 py-4 pt-6 pb-[150px]">
+          <h5 className="font-work uppercase text-1sm font-semibold text-black/50">
+            tabelas
+          </h5>
+          <ul className="px-5 py-4 pt-2">
+            <li
+              onClick={() => navigate("/controle/usuarios")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/usuarios" && "text-black"
+              } `}
+            >
+              <Users size={20} weight="bold" /> Usuários
+            </li>
+            <li
+              onClick={() => navigate("/controle/moedas")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/moedas" && "text-black"
+              } `}
+            >
+              <Coin size={20} weight="bold" /> Moedas
+            </li>
+            <li
+              onClick={() => navigate("/controle/regime-tributario")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/regime-tributario" && "text-black"
+              } `}
+            >
+              <Receipt size={20} weight="bold" /> Regime tributário
+            </li>
+            <li
+              onClick={() => navigate("/controle/objetivas")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/objetivas" && "text-black"
+              } `}
+            >
+              <Cube size={20} weight="bold" /> Objetivas
+            </li>
+            <li
+              onClick={() => navigate("/controle/tipo-de-estimativa")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/tipo-de-estimativa" && "text-black"
+              } `}
+            >
+              <HourglassSimpleHigh size={20} weight="bold" /> Tipo de estimativa
+            </li>
+            <li
+              onClick={() => navigate("/controle/seguros")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/seguros" && "text-black"
+              } `}
+            >
+              <ShieldCheck size={20} weight="bold" /> Seguros
+            </li>
+            <li
+              onClick={() => navigate("/controle/incoterms")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/incoterms" && "text-black"
+              } `}
+            >
+              <Bug size={20} weight="bold" /> Incoterms
+            </li>
+            <li
+              onClick={() => navigate("/controle/icms")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/icms" && "text-black"
+              } `}
+            >
+              <Car size={20} weight="bold" /> ICMS
+            </li>
+            <li
+              onClick={() => navigate("/controle/ufs")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/ufs" && "text-black"
+              } `}
+            >
+              <Buildings size={20} weight="bold" /> UFs
+            </li>
+          </ul>
+        </div>
 
-      <div className="w-full px-5 py-5 absolute bottom-0 border-t border-t-black/5">
-        <li
-          onClick={signOut}
-          className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-4 last:mb-0 cursor-pointer transition-all rounded-md text-red-500"
-        >
-          <SignOut size={20} weight="duotone" /> Sair da conta
-        </li>
-        <div className="flex justify-between items-center select-none cursor-pointer">
-          <div className=" flex items-center gap-4">
-            <div className="w-[50px] h-[50px] overflow-hidden rounded-lg">
-              <img
-                src={`https://avatars.dicebear.com/api/adventurer-neutral/${account?.name}.svg`}
-                alt={account?.name || "Pedro"}
-                className="w-full h-full"
-              />
+        <div className="w-[300px] bg-white h-[150px] px-5 py-5 fixed bottom-0 border-t border-t-black/5">
+          <li
+            onClick={signOut}
+            className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-4 last:mb-0 cursor-pointer transition-all rounded-md text-red-500"
+          >
+            <SignOut size={20} weight="duotone" /> Sair da conta
+          </li>
+          <div className="flex justify-between items-center select-none cursor-pointer">
+            <div className=" flex items-center gap-4">
+              <div className="w-[50px] h-[50px] overflow-hidden rounded-lg">
+                <img
+                  src={`https://avatars.dicebear.com/api/adventurer-neutral/${account?.name}.svg`}
+                  alt={account?.name || "Pedro"}
+                  className="w-full h-full"
+                />
+              </div>
+              <div>
+                <h3 className="text-lg font-work font-semibold">
+                  {account?.name}
+                </h3>
+                <p className="text-work text-sm text-black/40 mt-[-5px]">
+                  {account?.email}
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-work font-semibold">
-                {account?.name}
-              </h3>
-              <p className="text-work text-sm text-black/40 mt-[-5px]">
-                {account?.email}
-              </p>
+            <div className="text-black/60 ">
+              <CaretDown size={20} weight="bold" />
             </div>
-          </div>
-          <div className="text-black/60 ">
-            <CaretDown size={20} weight="bold" />
           </div>
         </div>
       </div>
