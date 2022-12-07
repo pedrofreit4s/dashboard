@@ -9,6 +9,7 @@ import { ObjectivesPage } from "../pages/control/objectives";
 import { SafesPage } from "../pages/control/safes";
 import { TaxRegimePage } from "../pages/control/tax-regime";
 import { TypeOfEstimatePage } from "../pages/control/type-of-estimate";
+import { UFsPage } from "../pages/control/uf";
 import { ControlLayout } from "../shared/layouts/ControlLayout";
 
 const dashboardRoutes = createHashRouter([
@@ -51,6 +52,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "icms",
         element: <IcmsPage />,
+      },
+      {
+        path: "ufs",
+        element: <UFsPage />,
       },
     ],
   },
