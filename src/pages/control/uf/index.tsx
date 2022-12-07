@@ -71,7 +71,7 @@ export function UFsPage() {
           </p>
         </div>
         <Button type="button" onClick={() => setUfModal(true)}>
-          Criar incoterm
+          Criar uf
         </Button>
       </div>
       <div
