@@ -15,6 +15,7 @@ import {
   Buildings,
   Bug,
   SignOut,
+  Boat,
 } from "phosphor-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -132,6 +133,14 @@ export function Sidebar() {
               } `}
             >
               <Buildings size={20} weight="bold" /> UFs
+            </li>
+            <li
+              onClick={() => navigate("/controle/tipos-de-containers")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/tipos-de-containers" && "text-black"
+              } `}
+            >
+              <Boat size={20} weight="bold" /> Tipos de containers
             </li>
           </ul>
         </div>

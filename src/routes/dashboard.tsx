@@ -3,6 +3,7 @@ import { createHashRouter } from "react-router-dom";
 import { AuthenticatePage } from "../pages/auth";
 import { AccountsPage } from "../pages/control/accounts";
 import { CoinsPage } from "../pages/control/coins";
+import { ContainerTypesPage } from "../pages/control/container-types";
 import { IcmsPage } from "../pages/control/icms";
 import { IncotermsPage } from "../pages/control/incoterms";
 import { ObjectivesPage } from "../pages/control/objectives";
@@ -56,6 +57,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "ufs",
         element: <UFsPage />,
+      },
+      {
+        path: "tipos-de-containers",
+        element: <ContainerTypesPage />,
       },
     ],
   },
