@@ -17,6 +17,7 @@ import {
   SignOut,
   Boat,
   Note,
+  Mountains,
 } from "phosphor-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -150,6 +151,14 @@ export function Sidebar() {
               } `}
             >
               <Note size={20} weight="bold" /> Taxas de agenciamento
+            </li>
+            <li
+              onClick={() => navigate("/controle/modais")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/modais" && "text-black"
+              } `}
+            >
+              <Mountains size={20} weight="bold" /> Modals
             </li>
           </ul>
         </div>

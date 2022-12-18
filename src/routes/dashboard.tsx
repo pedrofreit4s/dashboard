@@ -7,6 +7,7 @@ import { CoinsPage } from "../pages/control/coins";
 import { ContainerTypesPage } from "../pages/control/container-types";
 import { IcmsPage } from "../pages/control/icms";
 import { IncotermsPage } from "../pages/control/incoterms";
+import { ModalsPage } from "../pages/control/modals";
 import { ObjectivesPage } from "../pages/control/objectives";
 import { SafesPage } from "../pages/control/safes";
 import { TaxRegimePage } from "../pages/control/tax-regime";
@@ -66,6 +67,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "taxas-de-agenciamento",
         element: <AgencyFeesPage />,
+      },
+      {
+        path: "modais",
+        element: <ModalsPage />,
       },
     ],
   },
