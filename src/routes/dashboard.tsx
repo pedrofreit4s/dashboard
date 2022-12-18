@@ -2,6 +2,7 @@ import React from "react";
 import { createHashRouter } from "react-router-dom";
 import { AuthenticatePage } from "../pages/auth";
 import { AccountsPage } from "../pages/control/accounts";
+import { AgencyFeesPage } from "../pages/control/agency-fees";
 import { CoinsPage } from "../pages/control/coins";
 import { ContainerTypesPage } from "../pages/control/container-types";
 import { IcmsPage } from "../pages/control/icms";
@@ -61,6 +62,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "tipos-de-containers",
         element: <ContainerTypesPage />,
+      },
+      {
+        path: "taxas-de-agenciamento",
+        element: <AgencyFeesPage />,
       },
     ],
   },
