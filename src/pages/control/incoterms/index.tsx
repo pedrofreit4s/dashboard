@@ -110,7 +110,7 @@ export function IncotermsPage() {
             <thead className="shadow-md shadow-black/5">
               <tr className="text-1sm uppercase">
                 <th className="py-4 px-6 tracking-wider font-semibold">
-                  Seguro
+                  Incoterm
                 </th>
 
                 <th className="py-4 px-6 tracking-wider font-semibold">
