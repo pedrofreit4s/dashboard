@@ -106,9 +106,7 @@ export function UFsPage() {
           <table className="w-full border-collapse shadow-sm shadow-black/10 rounded-md text-left">
             <thead className="shadow-md shadow-black/5">
               <tr className="text-1sm uppercase">
-                <th className="py-4 px-6 tracking-wider font-semibold">
-                  Seguro
-                </th>
+                <th className="py-4 px-6 tracking-wider font-semibold">UF</th>
 
                 <th className="py-4 px-6 tracking-wider font-semibold">
                   Criada em
