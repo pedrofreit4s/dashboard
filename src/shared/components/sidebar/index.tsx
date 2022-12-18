@@ -121,12 +121,12 @@ export function Sidebar() {
               <Bug size={20} weight="bold" /> Incoterms
             </li>
             <li
-              onClick={() => navigate("/controle/icms")}
+              onClick={() => navigate("/controle/tipo-de-contribuinte")}
               className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
-                pathname === "/controle/icms" && "text-black"
+                pathname === "/controle/tipo-de-contribuinte" && "text-black"
               } `}
             >
-              <Car size={20} weight="bold" /> ICMS
+              <Car size={20} weight="bold" /> Tipo de contribuinte
             </li>
             <li
               onClick={() => navigate("/controle/ufs")}

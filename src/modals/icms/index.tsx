@@ -32,7 +32,11 @@ export function IcmsModal({ closeModal, icms }: IIcmsModalProps) {
         .post("/icms-tax-payer", { name })
         .then(() => {
           setIsLoading(false);
-          Swal.fire("Sucesso!", "Icms criado com sucesso!", "success");
+          Swal.fire(
+            "Sucesso!",
+            "Tipo de contribuinte criado com sucesso!",
+            "success"
+          );
           closeModal();
         })
         .catch((err) => {
@@ -47,7 +51,11 @@ export function IcmsModal({ closeModal, icms }: IIcmsModalProps) {
       })
       .then(() => {
         setIsLoading(false);
-        Swal.fire("Sucesso!", "Icms editado com sucesso!", "success");
+        Swal.fire(
+          "Sucesso!",
+          "Tipo de contribuinte editado com sucesso!",
+          "success"
+        );
         closeModal();
       })
       .catch((err) => {
@@ -66,7 +74,9 @@ export function IcmsModal({ closeModal, icms }: IIcmsModalProps) {
       >
         <div className="p-8 pb-2 flex items-center justify-between">
           <h3 className="font-work text-lg font-bold">
-            {icms?.id ? "Editar icms" : "Criar icms"}
+            {icms?.id
+              ? "Editar tipo de contribuinte"
+              : "Criar tipo de contribuinte"}
           </h3>
           <button
             className="bg-primary/5 p-3 rounded-full text-primary"
@@ -120,9 +130,9 @@ export function IcmsModal({ closeModal, icms }: IIcmsModalProps) {
                   Carregando..
                 </div>
               ) : icms?.id ? (
-                "Editar icms"
+                "Editar tipo"
               ) : (
-                "Criar icms"
+                "Criar tipo"
               )}
             </Button>
             <Button

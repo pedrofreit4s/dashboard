@@ -53,7 +53,7 @@ const dashboardRoutes = createHashRouter([
         element: <IncotermsPage />,
       },
       {
-        path: "icms",
+        path: "tipo-de-contribuinte",
         element: <IcmsPage />,
       },
       {

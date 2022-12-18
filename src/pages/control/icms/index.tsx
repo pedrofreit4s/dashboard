@@ -65,14 +65,14 @@ export function IcmsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-black/90 font-work font-bold text-xl">
-            ICMs cadastrados
+            Tipo de contribuinte cadastrados
           </h2>
           <p className="text-sm text-black/50">
-            administre todos os icms do sistema
+            administre todos os tipos de contribuintes do sistema
           </p>
         </div>
         <Button type="button" onClick={() => setIcmsModal(true)}>
-          Criar icms
+          Criar tipo
         </Button>
       </div>
       <div
@@ -107,7 +107,9 @@ export function IcmsPage() {
           <table className="w-full border-collapse shadow-sm shadow-black/10 rounded-md text-left">
             <thead className="shadow-md shadow-black/5">
               <tr className="text-1sm uppercase">
-                <th className="py-4 px-6 tracking-wider font-semibold">ICMs</th>
+                <th className="py-4 px-6 tracking-wider font-semibold">
+                  Tipo de contribuinte
+                </th>
 
                 <th className="py-4 px-6 tracking-wider font-semibold">
                   Criada em
