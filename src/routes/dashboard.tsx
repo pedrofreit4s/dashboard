@@ -5,6 +5,7 @@ import { AccountsPage } from "../pages/control/accounts";
 import { AgencyFeesPage } from "../pages/control/agency-fees";
 import { CoinsPage } from "../pages/control/coins";
 import { ContainerTypesPage } from "../pages/control/container-types";
+import { DispatchServicesAndFeesPage } from "../pages/control/dispatch-services-and-fees";
 import { IcmsPage } from "../pages/control/icms";
 import { IncotermsPage } from "../pages/control/incoterms";
 import { ModalsPage } from "../pages/control/modals";
@@ -71,6 +72,10 @@ const dashboardRoutes = createHashRouter([
       {
         path: "modais",
         element: <ModalsPage />,
+      },
+      {
+        path: "taxas-de-despachantes",
+        element: <DispatchServicesAndFeesPage />,
       },
     ],
   },

@@ -18,6 +18,7 @@ import {
   Boat,
   Note,
   Mountains,
+  AirplaneTakeoff,
 } from "phosphor-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -159,6 +160,16 @@ export function Sidebar() {
               } `}
             >
               <Mountains size={20} weight="bold" /> Modals
+            </li>
+
+            <li
+              onClick={() => navigate("/controle/taxas-de-despachantes")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/taxas-de-despachantes" && "text-black"
+              } `}
+            >
+              <AirplaneTakeoff size={20} weight="bold" />
+              Taxas de despachantes
             </li>
           </ul>
         </div>
