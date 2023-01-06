@@ -38,7 +38,7 @@ export function Sidebar() {
     <div className="w-[320px] h-screen fixed bg-white border-r border-r-black/5 overflow-y-auto">
       <div className="px-5 py-5">
         <h2 className="text-primary font-bold text-xl text-center">
-          JURID
+          SIMPORT
           <span className="text-black/50 font-medium text-md">/control</span>
         </h2>
       </div>
@@ -56,34 +56,26 @@ export function Sidebar() {
       <ul className="px-5 py-4 pt-2 border-b border-b-black/5">
         <li
           onClick={() => navigate("/controle/nova-simulacao")}
-          className={
-            pathname === "/controle/nova-simulacao" ? activeClass : normalClass
-          }
+          className={pathname === "/controle/nova-simulacao" ? activeClass : normalClass}
         >
           <Stack size={20} weight="bold" /> Simular algo
         </li>
         <li
           onClick={() => navigate("/controle/simulacoes")}
-          className={
-            pathname === "/controle/simulacoes" ? activeClass : normalClass
-          }
+          className={pathname === "/controle/simulacoes" ? activeClass : normalClass}
         >
           <Archive size={20} weight="bold" /> Minhas simulações
         </li>
         <li
           onClick={() => navigate("/controle/clientes")}
-          className={
-            pathname === "/controle/clientes" ? activeClass : normalClass
-          }
+          className={pathname === "/controle/clientes" ? activeClass : normalClass}
         >
           <Smiley size={20} weight="bold" /> Meus clientes
         </li>
       </ul>
       <div className="relative">
         <div className="px-5 py-4 pt-6">
-          <h5 className="font-work uppercase text-1sm font-semibold text-black/50">
-            Sistema
-          </h5>
+          <h5 className="font-work uppercase text-1sm font-semibold text-black/50">Sistema</h5>
           <ul className="px-5 py-4 pb-0 pt-2">
             <li
               onClick={() => navigate("/controle/clientes")}
@@ -96,9 +88,7 @@ export function Sidebar() {
           </ul>
         </div>
         <div className="px-5 py-4 pt-2 pb-[150px]">
-          <h5 className="font-work uppercase text-1sm font-semibold text-black/50">
-            tabelas
-          </h5>
+          <h5 className="font-work uppercase text-1sm font-semibold text-black/50">tabelas</h5>
           <ul className="px-5 py-4 pt-2">
             <li
               onClick={() => navigate("/controle/usuarios")}
@@ -226,12 +216,8 @@ export function Sidebar() {
                 />
               </div>
               <div>
-                <h3 className="text-lg font-work font-semibold">
-                  {account?.name}
-                </h3>
-                <p className="text-work text-sm text-black/40 mt-[-5px]">
-                  {account?.email}
-                </p>
+                <h3 className="text-lg font-work font-semibold">{account?.name}</h3>
+                <p className="text-work text-sm text-black/40 mt-[-5px]">{account?.email}</p>
               </div>
             </div>
             <div className="text-black/60 ">
