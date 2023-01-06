@@ -29,6 +29,11 @@ export function Sidebar() {
 
   const { account, signOut } = useAuth();
 
+  const normalClass =
+    "flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-al px-4";
+  const activeClass =
+    "flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md px-4 bg-black/5 text-black";
+
   return (
     <div className="w-[320px] h-screen fixed bg-white border-r border-r-black/5 overflow-y-auto">
       <div className="px-5 py-5">
@@ -49,18 +54,48 @@ export function Sidebar() {
       </div>
 
       <ul className="px-5 py-4 pt-2 border-b border-b-black/5">
-        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md px-4 bg-black/5 text-black">
+        <li
+          onClick={() => navigate("/controle/nova-simulacao")}
+          className={
+            pathname === "/controle/nova-simulacao" ? activeClass : normalClass
+          }
+        >
           <Stack size={20} weight="bold" /> Simular algo
         </li>
-        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-al px-4">
+        <li
+          onClick={() => navigate("/controle/simulacoes")}
+          className={
+            pathname === "/controle/simulacoes" ? activeClass : normalClass
+          }
+        >
           <Archive size={20} weight="bold" /> Minhas simulações
         </li>
-        <li className="flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all px-4">
+        <li
+          onClick={() => navigate("/controle/clientes")}
+          className={
+            pathname === "/controle/clientes" ? activeClass : normalClass
+          }
+        >
           <Smiley size={20} weight="bold" /> Meus clientes
         </li>
       </ul>
       <div className="relative">
-        <div className="px-5 py-4 pt-6 pb-[150px]">
+        <div className="px-5 py-4 pt-6">
+          <h5 className="font-work uppercase text-1sm font-semibold text-black/50">
+            Sistema
+          </h5>
+          <ul className="px-5 py-4 pb-0 pt-2">
+            <li
+              onClick={() => navigate("/controle/clientes")}
+              className={`flex text-black/50 text-sm items-center gap-3 py-[10px] mb-1 last:mb-0 cursor-pointer hover:text-black transition-all rounded-md ${
+                pathname === "/controle/clientes" && "text-black"
+              } `}
+            >
+              <Users size={20} weight="bold" /> Clientes
+            </li>
+          </ul>
+        </div>
+        <div className="px-5 py-4 pt-2 pb-[150px]">
           <h5 className="font-work uppercase text-1sm font-semibold text-black/50">
             tabelas
           </h5>
