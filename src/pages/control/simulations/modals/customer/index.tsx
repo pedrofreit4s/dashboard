@@ -114,8 +114,8 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
                 />
 
                 <form ref={formRef} className="mt-7" onSubmit={handleSubmit(onSubmit)}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="col-span-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="col-span-1 md:col-span-2">
                       <CustomerNameInput
                         id="name"
                         label="Nome do cliente"

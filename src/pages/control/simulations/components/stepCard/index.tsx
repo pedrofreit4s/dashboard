@@ -19,10 +19,10 @@ export function StepCard({ title, subtitle, isActive, icon, onClick }: Props) {
       ${isActive ? "bg-white hover:bg-white/75" : "bg-simulation-bg"}
       ${isActive ? "border-black/10" : "border-simulation-bg-contrast/10"}" transition-all`}
     >
-      <div className="grid grid-cols-7 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-7 items-center">
         <div className="col-span-5">
-          <div className="grid grid-cols-6 items-center">
-            <div className="col-span-1">
+          <div className="grid grid-cols-1 md:grid-cols-6 items-center">
+            <div className="hidden md:block col-span-1">
               <div
                 className={`w-9 h-9 rounded-md ${
                   isActive ? "bg-simulation-bg" : "bg-simulation-bg-contrast"
@@ -33,7 +33,7 @@ export function StepCard({ title, subtitle, isActive, icon, onClick }: Props) {
                 {icon}
               </div>
             </div>
-            <div className="col-span-5">
+            <div className="col-span-1 md:col-span-5">
               <h4
                 className={`${
                   isActive ? "text-simulation-title" : "text-simulation-text/80"
@@ -51,7 +51,7 @@ export function StepCard({ title, subtitle, isActive, icon, onClick }: Props) {
             </div>
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           <div className="flex items-center justify-end gap-1">
             <p className="text-simulation-text text-simulation-sm">selecionar</p>
             <div
