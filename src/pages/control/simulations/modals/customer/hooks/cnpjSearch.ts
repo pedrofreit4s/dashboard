@@ -19,5 +19,16 @@ export function useCNPJSearch() {
     }
   };
 
-  return { searchCNPJ, customer, setCustomer };
+  const searchById = async (id: string): Promise<ICustomer | undefined> => {
+    try {
+      const { data } = await api.get(`/customers/${id}/id`);
+
+      setCustomer(data);
+      return data;
+    } catch (error) {
+      console.log("no customer found!");
+    }
+  };
+
+  return { searchCNPJ, searchById, customer, setCustomer };
 }

@@ -119,7 +119,7 @@ export function TypeOfEstimateModal({ close, customerId, simulationId }: Props) 
           <FinalActions
             isLoading={savingIsLoading}
             cancelButtonText="Voltar"
-            confirmButtonText="Selecionar cliente"
+            confirmButtonText="Selecionar estimativa(s)"
             confirmButtonIsActive
             onConfirm={() => {
               formRef.current?.requestSubmit();

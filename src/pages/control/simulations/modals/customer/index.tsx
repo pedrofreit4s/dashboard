@@ -15,6 +15,8 @@ import { useUFs } from "./hooks/ufs";
 import { useTaxRegime } from "./hooks/taxRegime";
 import { ICustomerForm, useCustomerForm } from "./hooks/customerForm";
 import { useCNPJSearch } from "./hooks/cnpjSearch";
+import { useNameSearch } from "./hooks/useNameSearch";
+import { CustomerNameInput } from "./components/customerNameInput";
 
 interface Props {
   simulationId: string;
@@ -29,7 +31,7 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
   const { loadUFs, uf, setUf, ufs } = useUFs();
   const { loadTaxRegimes, taxRegime, setTaxRegime, taxRegimes } = useTaxRegime();
 
-  const { searchCNPJ, customer } = useCNPJSearch();
+  const { searchCNPJ, searchById, customer } = useCNPJSearch();
 
   const {
     formRef,
@@ -113,39 +115,36 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
 
                 <form ref={formRef} className="mt-7" onSubmit={handleSubmit(onSubmit)}>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="col-span-1">
-                      <Controller
-                        name="cnpj"
-                        control={control}
-                        render={({ field }) => (
-                          <div className="flex flex-col gap-[5px]">
-                            <label htmlFor={"cnpj"} className="text-simulation-label text-[14px] font-semibold">
-                              CNPJ
-                              <span className="text-red-600 text-md"></span>
-                            </label>
-                            <InputMask
-                              mask="99.999.999/9999-99"
-                              className={inputClassName}
-                              id="cnpj"
-                              type="text"
-                              {...field}
-                              onChange={async (e) => {
-                                field.onChange(e.target.value);
-                                const customer = await searchCNPJ(e.target.value);
-                                if (!customer) return;
-                                setValue("cnpj", customer.cnpj);
-                                setValue("name", customer.name);
-                                setValue("fantasy_name", customer.fantasy_name);
-                                setValue("is_icms_tax_payer", customer.is_icms_tax_payer);
-                                setValue("is_industry", customer.is_industry);
-                                setValue("is_cde", customer.is_cde);
+                    <div className="col-span-2">
+                      <CustomerNameInput
+                        id="name"
+                        label="Nome do cliente"
+                        isRequired
+                        defaultValue={{ key: customer?.id || "", value: customer?.name || "" }}
+                        select={async (item) => {
+                          const customer = await searchById(item.key);
+                          if (!customer) return;
 
-                                setUf({ key: customer.ufId, value: customer.uf.name });
-                                setTaxRegime({ key: customer.taxRegimeId, value: customer.taxRegime.name });
-                              }}
-                            />
-                          </div>
-                        )}
+                          setValue("cnpj", customer.cnpj);
+                          setValue("name", customer.name);
+                          setValue("fantasy_name", customer.fantasy_name);
+                          setValue("is_icms_tax_payer", customer.is_icms_tax_payer);
+                          setValue("is_industry", customer.is_industry);
+                          setValue("is_cde", customer.is_cde);
+
+                          setUf({ key: customer.ufId, value: customer.uf.name });
+                          setTaxRegime({ key: customer.taxRegimeId, value: customer.taxRegime.name });
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-span-1">
+                      <Input
+                        label="Nome fantasia"
+                        isRequired
+                        name="fantasy_name"
+                        register={register}
+                        error={errors.fantasy_name}
                       />
                     </div>
                     <div className="col-span-1">
@@ -162,19 +161,28 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
                     </div>
 
                     <div className="col-span-1">
-                      <Input label="Nome do cliente" isRequired name="name" register={register} error={errors.name} />
-                    </div>
-                    <div className="col-span-1">
-                      <Input
-                        label="Nome fantasia"
-                        isRequired
-                        name="fantasy_name"
-                        register={register}
-                        error={errors.fantasy_name}
+                      <Controller
+                        name="cnpj"
+                        control={control}
+                        render={({ field }) => (
+                          <div className="flex flex-col gap-[5px]">
+                            <label htmlFor={"cnpj"} className="text-simulation-label text-[14px] font-semibold">
+                              CNPJ
+                              <span className="text-red-600 text-md"></span>
+                            </label>
+                            <InputMask
+                              mask="99.999.999/9999-99"
+                              className={inputClassName}
+                              id="cnpj"
+                              type="text"
+                              {...field}
+                            />
+                          </div>
+                        )}
                       />
                     </div>
 
-                    <div className="col-span-2">
+                    <div className="col-span-1">
                       {taxRegimes && !isLoading ? (
                         <CustomSelect
                           id="regime_tributario"

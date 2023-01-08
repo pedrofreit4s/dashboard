@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Buildings, HourglassSimpleHigh } from "phosphor-react";
 import { Container } from "./components/container";
 import { SimulationHead } from "./components/head";
@@ -7,38 +7,27 @@ import { FinalActions } from "./components/finalActions";
 import { CustomerModal } from "./modals/customer";
 import { AnimatePresence } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
-import { ISimulation } from "../../../shared/interfaces/simulations/ISimulation";
-import { toast } from "react-hot-toast";
-import { api } from "../../../shared/services/api";
 import { maskCNPJ } from "../../../utils/masks/cnpj";
 import { TypeOfEstimateModal } from "./modals/typeOfEstimate";
+import { useIsLoading } from "./hooks/useIsLoading";
+import { useSimulations } from "./hooks/useSimulations";
 
 export function Step01SimulationPage() {
   const [customerModal, setCustomerModal] = useState(false);
   const [typeOfEstimateModal, setTypeOfEstimateModal] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [simulation, setSimulation] = useState<ISimulation>();
+  const { isLoading, setIsLoading } = useIsLoading();
+  const { loadSimulationById, simulation } = useSimulations();
 
   const { id } = useParams();
   const navigation = useNavigate();
 
-  const loadSimulation = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await api.get(`/simulations/${id}`);
-      setSimulation(data);
-    } catch (error) {
-      toast.error("Houve um problema ao carregar a simulação!");
-      navigation("/controle/simulacoes");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [id]);
-
   useEffect(() => {
-    loadSimulation();
-  }, []);
+    if (!id) return;
+    setIsLoading(true);
+
+    loadSimulationById(id).then(() => setIsLoading(false));
+  }, [id]);
 
   return (
     <>
@@ -54,7 +43,7 @@ export function Step01SimulationPage() {
             cnpj={simulation?.customer?.cnpj}
             close={() => {
               setCustomerModal(false);
-              loadSimulation();
+              loadSimulationById(id || "");
             }}
           />
         )}
@@ -64,6 +53,7 @@ export function Step01SimulationPage() {
             simulationId={id || ""}
             close={() => {
               setTypeOfEstimateModal(false);
+              loadSimulationById(id || "");
             }}
           />
         )}
@@ -72,19 +62,18 @@ export function Step01SimulationPage() {
       <Container>
         <div className="grid grid-cols-1 gap-3">
           <StepCard
-            icon={<Buildings size={20} />}
-            title={simulation?.customer ? simulation.customer.name : "Clientes"}
-            subtitle={simulation?.customer ? maskCNPJ(simulation.customer.cnpj) : "Selecione o cliente"}
-            isActive
-            onClick={() => setCustomerModal(true)}
-          />
-
-          <StepCard
             icon={<HourglassSimpleHigh size={20} />}
             title="Tipo de estimativa"
             subtitle="Selecione o tipo"
-            isActive={!!simulation?.customer?.id}
+            isActive
             onClick={() => setTypeOfEstimateModal(true)}
+          />
+          <StepCard
+            icon={<Buildings size={20} />}
+            title={simulation?.customer ? simulation.customer.name : "Clientes"}
+            subtitle={simulation?.customer ? maskCNPJ(simulation.customer.cnpj) : "Selecione o cliente"}
+            isActive={!!simulation?.typeOfEstimates?.length}
+            onClick={() => setCustomerModal(true)}
           />
         </div>
         <div className="mt-8">
