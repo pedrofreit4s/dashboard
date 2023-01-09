@@ -10,7 +10,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 export const inputClassName =
-  "w-full border border-simulation-input-border rounded-md h-[44px] px-4 bg-white shadow-simulation-input text-simulation-input-color placeholder:text-simulation-input-placeholder focus:border-primary";
+  "w-full border border-simulation-input-border rounded-md h-[44px] px-4 bg-white shadow-simulation-input text-simulation-input-color placeholder:text-simulation-sm placeholder:text-simulation-input-placeholder focus:border-primary";
 
 export function Input({ label, isRequired, name, register, error, ...rest }: Props) {
   return (

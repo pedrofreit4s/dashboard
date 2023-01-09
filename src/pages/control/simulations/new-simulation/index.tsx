@@ -30,7 +30,7 @@ export function NewSimulationPage() {
   return (
     <>
       <SimulationHead
-        title="Portal de simulaçoões"
+        title="Portal de simulações"
         text="Utilize todos os recursos disponíveis aqui para ver uma simulação. Para começar, crie uma simulação"
       />
 
