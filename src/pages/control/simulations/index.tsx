@@ -65,12 +65,10 @@ export function SimulationsPage() {
                 {simulations?.data.map((simulation) => (
                   <div
                     key={simulation.id}
-                    className="w-full bg-white shadow-simulation-sm rounded-md py-4 px-5 border border-black/10"
+                    className="w-full bg-white shadow-simulation-sm rounded-md py-4 px-5 border border-black/10 cursor-pointer"
+                    onClick={() => navigate(`/controle/simulacoes/${simulation.id}`)}
                   >
-                    <div
-                      className="grid grid-cols-8 items-center"
-                      onClick={() => navigate(`/controle/simulacoes/${simulation.id}`)}
-                    >
+                    <div className="grid grid-cols-8 items-center">
                       <div className="col-span-3">
                         <div className="grid grid-cols-7 gap-4">
                           <div className="col-span-1">
