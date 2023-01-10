@@ -17,6 +17,7 @@ import { ICustomerForm, useCustomerForm } from "./hooks/customerForm";
 import { useCNPJSearch } from "./hooks/cnpjSearch";
 import { useNameSearch } from "./hooks/useNameSearch";
 import { CustomerNameInput } from "./components/customerNameInput";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   simulationId: string;
@@ -32,6 +33,8 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
   const { loadTaxRegimes, taxRegime, setTaxRegime, taxRegimes } = useTaxRegime();
 
   const { searchCNPJ, searchById, customer } = useCNPJSearch();
+
+  const navigate = useNavigate();
 
   const {
     formRef,

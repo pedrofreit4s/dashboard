@@ -20,7 +20,7 @@ export function Step01SimulationPage() {
   const { loadSimulationById, simulation } = useSimulations();
 
   const { id } = useParams();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
@@ -77,7 +77,11 @@ export function Step01SimulationPage() {
           />
         </div>
         <div className="mt-8">
-          <FinalActions confirmButtonText="Próximo" cancelButtonText="Voltar" />
+          <FinalActions
+            confirmButtonText="Próximo"
+            cancelButtonText="Voltar"
+            onCancel={() => navigate("/controle/simulacoes")}
+          />
         </div>
       </Container>
     </>

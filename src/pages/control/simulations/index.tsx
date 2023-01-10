@@ -9,13 +9,10 @@ import { FilterCard } from "./components/filtersCard";
 import { getAvatarSource } from "../../../utils/avatar";
 import { maskCNPJ } from "../../../utils/masks/cnpj";
 import { format } from "date-fns";
-import { Eye, Pencil, Trash } from "phosphor-react";
+import { Eye, Pencil } from "phosphor-react";
 import { Button } from "./components/button";
 
 export function SimulationsPage() {
-  const [customerModal, setCustomerModal] = useState(false);
-  const [typeOfEstimateModal, setTypeOfEstimateModal] = useState(false);
-
   const { isLoading, setIsLoading } = useIsLoading(false);
   const { loadSimulations, setSimulations, simulations } = useSimulations();
 
