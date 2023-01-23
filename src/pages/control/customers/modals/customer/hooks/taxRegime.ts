@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { api } from "../../../../../../shared/services/api";
-import { Item } from "../../../components/customSelect";
+import { Item } from "../components/customerNameInput";
 
 export function useTaxRegime() {
   const [taxRegime, setTaxRegime] = useState<Item | undefined>();
