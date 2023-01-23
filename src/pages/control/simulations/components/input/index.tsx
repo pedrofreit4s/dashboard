@@ -1,7 +1,7 @@
 import React from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
-interface Props extends React.HTMLAttributes<HTMLInputElement> {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   isRequired?: boolean;
   name: string;

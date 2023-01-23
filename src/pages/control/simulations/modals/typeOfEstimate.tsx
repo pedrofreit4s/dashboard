@@ -11,27 +11,54 @@ import { toast } from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 import InputMask from "react-input-mask";
 import * as yup from "yup";
+import { useSimulations } from "../hooks/useSimulations";
+import { ISimulation } from "../../../../shared/interfaces/simulations/ISimulation";
+import { ITypeOfEstimate } from "../../../../shared/interfaces/ITypeOfEstimate";
+
+interface IEstimate {
+  id: string;
+  isCheck: boolean;
+}
 
 interface IForm {
-  estimate: string[];
+  estimate: IEstimate[];
 }
 
 interface Props {
   simulationId: string;
-  customerId?: string;
+
   close: () => void;
 }
 
-export function TypeOfEstimateModal({ close, customerId, simulationId }: Props) {
+export function TypeOfEstimateModal({ close, simulationId }: Props) {
   const [isLoading, setIsLoading] = useState(true);
 
   const [typeOfEstimates, setTypeOfEstimates] = useState([]);
   const [savingIsLoading, setSavingIsLoading] = useState(false);
 
+  const [typeOfEstimateSelected, setTypeOfEstimateSelected] = useState<IEstimate[]>([]);
+
+  const { loadSimulationById } = useSimulations();
+
   const loadTypeOfEstimates = useCallback(async () => {
     setIsLoading(true);
     try {
-      const { data } = await api.get(`/type-of-estimate`);
+      const { data } = await api.get<never[]>(`/type-of-estimate`);
+
+      data.forEach((typeOfEstimate: ITypeOfEstimate) => {
+        setTypeOfEstimateSelected((old) => {
+          const typeOfEstimatesNew = old.filter((estimate) => estimate.id !== typeOfEstimate.id);
+
+          return [
+            ...typeOfEstimatesNew,
+            {
+              id: typeOfEstimate.id,
+              isCheck: false,
+            },
+          ];
+        });
+      });
+
       setTypeOfEstimates(data);
     } catch (error) {
       toast.error("Houve um problema ao carregar os tipos de estimativa!");
@@ -43,45 +70,51 @@ export function TypeOfEstimateModal({ close, customerId, simulationId }: Props) 
     loadTypeOfEstimates();
   }, []);
 
+  useEffect(() => {
+    loadSimulationById(simulationId).then((data: ISimulation) => {
+      data.typeOfEstimates.forEach((typeOfEstimate, index) => {
+        setTypeOfEstimateSelected((old) => {
+          const typeOfEstimatesNew = old.filter((estimate) => estimate.id !== typeOfEstimate.id);
+
+          return [
+            ...typeOfEstimatesNew,
+            {
+              id: typeOfEstimate.id,
+              isCheck: true,
+            },
+          ];
+        });
+      });
+    });
+  }, [simulationId]);
+
   const formRef = useRef<HTMLFormElement>(null);
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm<IForm>({
-    // resolver: yupResolver(
-    //   yup.object({
-    //     direct_import: yup.boolean(),
-    //     account_and_third_party_order_sc: yup.boolean(),
-    //     order_ro: yup.boolean(),
-    //     order_sc: yup.boolean(),
-    //     purchase_and_sale_distribution: yup.boolean(),
-    //   })
-    // ),
-  });
+  const onSubmit = useCallback(
+    async (e: React.ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-  const onSubmit = useCallback(async (form: IForm) => {
-    if (form.estimate.length === 0) return toast.success("Informe aos menos uma estimativa!");
-    setSavingIsLoading(true);
+      console.log(typeOfEstimateSelected);
 
-    try {
-      await api.patch(`/simulations/${simulationId}`, {
-        type_of_estimateIds: form.estimate,
-      });
+      if (typeOfEstimateSelected.filter((typeOfEstimate) => typeOfEstimate.isCheck).length === 0)
+        return toast.error("Informe aos menos uma estimativa!");
+      setSavingIsLoading(true);
 
-      toast.success("Cliente selecionado com sucesso!");
-      close();
-    } catch (error: any) {
-      console.log(error.response.data.message);
-    } finally {
-      setSavingIsLoading(false);
-    }
-  }, []);
+      try {
+        await api.patch(`/simulations/${simulationId}`, {
+          type_of_estimateIds: typeOfEstimateSelected.filter((estimate) => estimate),
+        });
+
+        toast.success("Cliente selecionado com sucesso!");
+        close();
+      } catch (error: any) {
+        console.log(error.response.data.message);
+      } finally {
+        setSavingIsLoading(false);
+      }
+    },
+    [typeOfEstimateSelected]
+  );
 
   return (
     <motion.div
@@ -99,14 +132,25 @@ export function TypeOfEstimateModal({ close, customerId, simulationId }: Props) 
             text="Caso informe mais de um tipo de estimativa, o sistema irá gerar uma estimativa para cada tipo selecionado, que será possível compara-las posteriormente."
           />
 
-          <form ref={formRef} className="mt-7" onSubmit={handleSubmit(onSubmit)}>
+          <form ref={formRef} className="mt-7" onSubmit={onSubmit}>
             <div className="grid grid-cols-2 gap-4">
               {typeOfEstimates.map((typeOfEstimate: any, index) => (
                 <div key={typeOfEstimate.id} className="col-span-2">
                   <Checkbox
                     label={typeOfEstimate.name}
-                    onChange={() => {
-                      setValue(`estimate.${index}`, typeOfEstimate.id);
+                    checked={typeOfEstimateSelected.filter((estimate) => estimate.id === typeOfEstimate.id)[0]?.isCheck}
+                    onChange={(e) => {
+                      setTypeOfEstimateSelected((old) => {
+                        const typeOfEstimatesNew = old.filter((estimate) => estimate.id !== typeOfEstimate.id);
+
+                        return [
+                          ...typeOfEstimatesNew,
+                          {
+                            id: typeOfEstimate.id,
+                            isCheck: e.target.checked,
+                          },
+                        ];
+                      });
                     }}
                   />
                 </div>

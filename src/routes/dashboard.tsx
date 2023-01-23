@@ -1,6 +1,7 @@
 import React from "react";
 import { createHashRouter, RouteObject } from "react-router-dom";
 import { AuthenticatePage } from "../pages/auth";
+import { Customers } from "../pages/control/customers";
 import { AccountsPage } from "../pages/control/tables/accounts";
 import { AgencyFeesPage } from "../pages/control/tables/agency-fees";
 import { CoinsPage } from "../pages/control/tables/coins";
@@ -16,10 +17,6 @@ import { TypeOfEstimatePage } from "../pages/control/tables/type-of-estimate";
 import { UFsPage } from "../pages/control/tables/uf";
 import { ControlLayout } from "../shared/layouts/ControlLayout";
 
-// {
-//   path: "/",
-//   element: <AuthenticatePage />,
-// },
 const tablesRoutes: RouteObject = {
   path: "/controle",
   element: <ControlLayout />,

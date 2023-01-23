@@ -1,4 +1,5 @@
 import { ITaxRegime } from "../ITaxRegime";
+import { ICustomerDispatcherFee } from "./ICustomerDispatcherFee";
 import { IUF } from "./IUf";
 
 export interface ICustomer {
@@ -15,4 +16,5 @@ export interface ICustomer {
   is_cde: boolean;
   created_at: Date;
   updated_at: Date;
+  customerDispatcherFees: ICustomerDispatcherFee[];
 }

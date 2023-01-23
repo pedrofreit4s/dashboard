@@ -1,37 +1,32 @@
 import React, { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { api } from "../../../../../shared/services/api";
-import { Alert } from "../../components/alert";
-import { Checkbox } from "../../components/checkbox";
-import { CustomSelect } from "../../components/customSelect";
-import { FinalActions } from "../../components/finalActions";
-import { Input, inputClassName } from "../../components/input";
 import { toast } from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
-import InputMask from "react-input-mask";
-
 import { useLoading } from "./hooks/loading";
 import { useUFs } from "./hooks/ufs";
 import { useTaxRegime } from "./hooks/taxRegime";
 import { ICustomerForm, useCustomerForm } from "./hooks/customerForm";
 import { useCNPJSearch } from "./hooks/cnpjSearch";
-import { CustomerNameInput } from "./components/customerNameInput";
 import { useNavigate } from "react-router-dom";
+import { Input, inputClassName } from "../../../simulations/components/input";
+import { CustomSelect } from "../../../simulations/components/customSelect";
+import { Checkbox } from "../../../simulations/components/checkbox";
+import { FinalActions } from "../../../simulations/components/finalActions";
+import InputMask from "react-input-mask";
+import { ICustomer } from "../../../../../shared/interfaces/simulations/ICustomer";
 
 interface Props {
-  simulationId: string;
-  cnpj?: string;
-  close: () => void;
+  close: (id?: string) => void;
+  customer?: ICustomer;
 }
 
-export function CustomerModal({ close, cnpj, simulationId }: Props) {
+export function CustomerModal({ close, customer }: Props) {
   const { isLoading, setIsLoading } = useLoading();
   const { isLoading: savingIsLoading, setIsLoading: setSavingIsLoading } = useLoading();
 
   const { loadUFs, uf, setUf, ufs } = useUFs();
   const { loadTaxRegimes, taxRegime, setTaxRegime, taxRegimes } = useTaxRegime();
-
-  const { searchCNPJ, searchById, customer } = useCNPJSearch();
 
   const navigate = useNavigate();
 
@@ -45,7 +40,7 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
   } = useCustomerForm(
     customer
       ? {
-          is_industry: true,
+          ...customer,
         }
       : {
           is_icms_tax_payer: true,
@@ -53,22 +48,8 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
   );
 
   useEffect(() => {
-    if (!cnpj) return;
-    searchCNPJ(cnpj).then((customer) => {
-      if (!customer) return;
-      setValue("cnpj", customer.cnpj);
-      setValue("name", customer.name);
-      setValue("fantasy_name", customer.fantasy_name);
-      setValue("is_icms_tax_payer", customer.is_icms_tax_payer);
-      setValue("is_industry", customer.is_industry);
-      setValue("is_cde", customer.is_cde);
-
-      setUf({ key: customer.ufId, value: customer.uf.name });
-      setTaxRegime({ key: customer.taxRegimeId, value: customer.taxRegime.name });
-    });
-  }, []);
-
-  useEffect(() => {
+    if (customer?.uf) setUf({ key: customer.uf.id, value: customer.uf.name });
+    if (customer?.taxRegime) setTaxRegime({ key: customer.taxRegime.id, value: customer.taxRegime.name });
     setIsLoading(true);
     Promise.all([loadUFs(), loadTaxRegimes()]).then(() => {
       setIsLoading(false);
@@ -79,20 +60,27 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
     if (!uf || !taxRegime) return toast.error("Informe todos os campos!");
     setSavingIsLoading(true);
 
+    if (customer?.id) {
+      const { data } = await api.put(`/customers/${customer?.id}`, form);
+
+      console.log(data);
+      setSavingIsLoading(false);
+      toast.success("Cliente atualizado com sucesso!");
+
+      close();
+      return;
+    }
+
     const { data } = await api.post("/customers", {
       ...form,
       tax_regime_id: taxRegime.key,
       ufId: uf.key,
     });
 
-    await api.patch(`/simulations/${simulationId}`, {
-      customer_id: data.id,
-    });
-
     setSavingIsLoading(false);
 
-    toast.success("Cliente selecionado com sucesso!");
-    close();
+    toast.success("Cliente salvo com sucesso!");
+    close(data.id);
   };
 
   return (
@@ -109,35 +97,10 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
             {/* {isLoading && ()} */}
             {!isLoading && (
               <motion.div>
-                <Alert
-                  emoji={"✍️"}
-                  title="Informe o CNPJ, caso o cliente não possua é só deixar em branco!"
-                  text="Caso informado o CNPJ, vamos procurar o cliente na base da dados, e se localizado, será preenchido os dados automaticamente!"
-                />
-
-                <form ref={formRef} className="mt-7" onSubmit={handleSubmit(onSubmit)}>
+                <form ref={formRef} className="mt-0" onSubmit={handleSubmit(onSubmit)}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="col-span-1 md:col-span-2">
-                      <CustomerNameInput
-                        id="name"
-                        label="Nome do cliente"
-                        isRequired
-                        defaultValue={{ key: customer?.id || "", value: customer?.name || "" }}
-                        select={async (item) => {
-                          const customer = await searchById(item.key);
-                          if (!customer) return;
-
-                          setValue("cnpj", customer.cnpj);
-                          setValue("name", customer.name);
-                          setValue("fantasy_name", customer.fantasy_name);
-                          setValue("is_icms_tax_payer", customer.is_icms_tax_payer);
-                          setValue("is_industry", customer.is_industry);
-                          setValue("is_cde", customer.is_cde);
-
-                          setUf({ key: customer.ufId, value: customer.uf.name });
-                          setTaxRegime({ key: customer.taxRegimeId, value: customer.taxRegime.name });
-                        }}
-                      />
+                      <Input label="Nome do cliente" isRequired name="name" register={register} error={errors.name} />
                     </div>
 
                     <div className="col-span-1">
@@ -223,12 +186,12 @@ export function CustomerModal({ close, cnpj, simulationId }: Props) {
           <FinalActions
             isLoading={savingIsLoading}
             cancelButtonText="Voltar"
-            confirmButtonText="Selecionar cliente"
+            confirmButtonText="Salvar cliente"
             confirmButtonIsActive
             onConfirm={() => {
               formRef.current?.requestSubmit();
             }}
-            onCancel={close}
+            onCancel={() => close(undefined)}
           />
         </div>
       </div>
