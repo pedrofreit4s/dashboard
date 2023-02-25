@@ -20,7 +20,7 @@ export function CurrencyModal({ close, simulationId }: Props) {
   const [savingIsLoading, setSavingIsLoading] = useState(false);
 
   const { loadSimulationById, simulation } = useSimulations();
-  const { currenciesToSelect, findCurrencyFeeByDate } = useCurrencyAndFees();
+  const { currenciesIsLoading, currenciesToSelect, findCurrencyFeeByDate } = useCurrencyAndFees();
 
   // Form
   const {
@@ -86,11 +86,11 @@ export function CurrencyModal({ close, simulationId }: Props) {
     >
       <div className="w-full max-w-[675px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
         <div className="w-full bg-white shadow-simulation-md border border-black/10 rounded-xl py-7 px-8 relative">
-          {isLoading && (
+          {isLoading || currenciesIsLoading ? (
             <div className="w-full h-full absolute bg-white/80 z-30 top-0 bottom-0 right-0 left-0 flex items-center justify-center rounded-xl">
               <LoaderIcon style={{ width: 60, height: 60, borderWidth: 4 }} />
             </div>
-          )}
+          ) : null}
 
           <Alert
             emoji={"✍️"}
@@ -113,7 +113,7 @@ export function CurrencyModal({ close, simulationId }: Props) {
             </div>
             <div className="grid grid-cols-2 gap-4 mt-5">
               <div className="col-span-1">
-                {currenciesToSelect ? (
+                {currenciesToSelect && !currenciesIsLoading ? (
                   <CustomSelect
                     id="moeda_mercadorias"
                     label="Moeda das mercadorias"
@@ -144,7 +144,7 @@ export function CurrencyModal({ close, simulationId }: Props) {
 
             <div className="grid grid-cols-2 gap-4 mt-3">
               <div className="col-span-1">
-                {currenciesToSelect ? (
+                {currenciesToSelect && !currenciesIsLoading ? (
                   <CustomSelect
                     id="moeda_frete_internacional"
                     label="Moeda do Frete Internacional"
@@ -178,7 +178,7 @@ export function CurrencyModal({ close, simulationId }: Props) {
 
             <div className="grid grid-cols-2 gap-4 mt-3">
               <div className="col-span-1">
-                {currenciesToSelect ? (
+                {currenciesToSelect && !currenciesIsLoading ? (
                   <CustomSelect
                     id="moeda_seguro"
                     label="Moeda do seguro"
@@ -212,7 +212,7 @@ export function CurrencyModal({ close, simulationId }: Props) {
 
             <div className="grid grid-cols-2 gap-4 mt-3">
               <div className="col-span-1">
-                {currenciesToSelect ? (
+                {currenciesToSelect && !currenciesIsLoading ? (
                   <CustomSelect
                     id="moeda_agenciamento"
                     label="Moeda do agenciamento"
