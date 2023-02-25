@@ -4,6 +4,7 @@ import { Step01SimulationPage } from "../pages/control/simulations/new-simulatio
 import { NewSimulationPage } from "../pages/control/simulations/new-simulation";
 import { SimulationLayout } from "../shared/layouts/SimulationLayout";
 import { SimulationsPage } from "../pages/control/simulations";
+import { Step02CurrenciesSimulationPage } from "../pages/control/simulations/new-simulation/currencies";
 
 const simulationsRoutes: RouteObject[] = [
   {
@@ -27,6 +28,10 @@ const simulationsRoutes: RouteObject[] = [
       {
         path: ":id",
         element: <Step01SimulationPage />,
+      },
+      {
+        path: ":id/moedas",
+        element: <Step02CurrenciesSimulationPage />,
       },
     ],
   },

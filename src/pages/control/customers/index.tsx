@@ -135,9 +135,9 @@ export function Customers() {
                           >
                             <Pencil size={20} weight="bold" />
                           </div>
-                          <div className="text-red-600 cursor-pointer" onClick={() => deleteCustomer(customer.id)}>
+                          {/* <div className="text-red-600 cursor-pointer" onClick={() => deleteCustomer(customer.id)}>
                             <Trash size={20} weight="bold" />
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>

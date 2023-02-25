@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Buildings, HourglassSimpleHigh } from "phosphor-react";
+import { useEffect, useState } from "react";
+import { Coin } from "phosphor-react";
 import { Container } from "../components/container";
 import { SimulationHead } from "../components/head";
 import { StepCard } from "../components/stepCard";
@@ -7,14 +7,13 @@ import { FinalActions } from "../components/finalActions";
 import { CustomerModal } from "../modals/customer";
 import { AnimatePresence } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
-import { maskCNPJ } from "../../../../utils/masks/cnpj";
-import { TypeOfEstimateModal } from "../modals/typeOfEstimate";
 import { useIsLoading } from "../hooks/useIsLoading";
 import { useSimulations } from "../hooks/useSimulations";
+import { CurrencyModal } from "../modals/currency";
 
-export function Step01SimulationPage() {
+export function Step02CurrenciesSimulationPage() {
   const [customerModal, setCustomerModal] = useState(false);
-  const [typeOfEstimateModal, setTypeOfEstimateModal] = useState(false);
+  const [currencyModal, setCurrenciesModal] = useState(false);
 
   const { isLoading, setIsLoading } = useIsLoading();
   const { loadSimulationById, simulation } = useSimulations();
@@ -48,11 +47,11 @@ export function Step01SimulationPage() {
           />
         )}
 
-        {typeOfEstimateModal && (
-          <TypeOfEstimateModal
+        {currencyModal && (
+          <CurrencyModal
             simulationId={id || ""}
             close={() => {
-              setTypeOfEstimateModal(false);
+              setCurrenciesModal(false);
               loadSimulationById(id || "");
             }}
           />
@@ -62,29 +61,25 @@ export function Step01SimulationPage() {
       <Container>
         <div className="grid grid-cols-1 gap-3">
           <StepCard
-            icon={<HourglassSimpleHigh size={20} />}
-            title="Tipo de estimativa"
-            subtitle="Selecione o tipo"
+            icon={<Coin size={20} />}
+            title="Moedas e taxas"
+            subtitle="Selecione as moedas"
             isActive
-            onClick={() => setTypeOfEstimateModal(true)}
+            onClick={() => setCurrenciesModal(true)}
           />
-          <StepCard
+          {/* <StepCard
             icon={<Buildings size={20} />}
             title={simulation?.customer ? simulation.customer.name : "Clientes"}
             subtitle={simulation?.customer ? maskCNPJ(simulation.customer.cnpj) : "Selecione o cliente"}
             isActive={!!simulation?.typeOfEstimates?.length}
             onClick={() => setCustomerModal(true)}
-          />
+          /> */}
         </div>
         <div className="mt-8">
           <FinalActions
             confirmButtonText="Próximo"
             cancelButtonText="Voltar"
-            onCancel={() => navigate("/controle/simulacoes")}
-            onConfirm={() => navigate(`/controle/simulacoes/${simulation?.id}/moedas`)}
-            confirmButtonIsActive={
-              simulation?.typeOfEstimates?.length ? simulation?.typeOfEstimates.length >= 1 : false
-            }
+            onCancel={() => navigate(`/controle/simulacoes/${simulation?.id}`)}
           />
         </div>
       </Container>

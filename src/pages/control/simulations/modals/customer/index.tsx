@@ -9,7 +9,6 @@ import { Input, inputClassName } from "../../components/input";
 import { toast } from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 import InputMask from "react-input-mask";
-
 import { useLoading } from "./hooks/loading";
 import { useUFs } from "./hooks/ufs";
 import { useTaxRegime } from "./hooks/taxRegime";

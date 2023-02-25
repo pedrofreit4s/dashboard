@@ -11,7 +11,7 @@ interface Props {
   id: string;
   isRequired?: boolean;
   defaultValue?: Item;
-  select(item: Item): void;
+  select(item: Item): Promise<void> | void;
   items: Item[];
 }
 

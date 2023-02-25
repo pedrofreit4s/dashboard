@@ -1,4 +1,5 @@
 import { ITypeOfEstimate } from "../ITypeOfEstimate";
+import { ICurrencyAndFees } from "./ICurrencyAndFee";
 import { ICustomer } from "./ICustomer";
 
 export interface ISimulation {
@@ -8,4 +9,5 @@ export interface ISimulation {
   customerId?: any;
   created_at: Date;
   updated_at: Date;
+  SimulationCurrenciesAndFees: ICurrencyAndFees[];
 }
