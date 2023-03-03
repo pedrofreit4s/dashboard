@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { Coin } from "phosphor-react";
+import { Coin, Truck } from "phosphor-react";
 import { Container } from "../components/container";
 import { SimulationHead } from "../components/head";
 import { StepCard } from "../components/stepCard";
 import { FinalActions } from "../components/finalActions";
-import { CustomerModal } from "../modals/customer";
 import { AnimatePresence } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
 import { useIsLoading } from "../hooks/useIsLoading";
 import { useSimulations } from "../hooks/useSimulations";
 import { CurrencyModal } from "../modals/currency";
+import { InternationalTransportModal } from "../modals/internationalTransport";
 
 export function Step02CurrenciesSimulationPage() {
-  const [customerModal, setCustomerModal] = useState(false);
   const [currencyModal, setCurrenciesModal] = useState(false);
+  const [internationalTransportModal, setInternationalTransportModal] = useState(false);
 
   const { isLoading, setIsLoading } = useIsLoading();
   const { loadSimulationById, simulation } = useSimulations();
@@ -36,22 +36,20 @@ export function Step02CurrenciesSimulationPage() {
       />
 
       <AnimatePresence>
-        {customerModal && (
-          <CustomerModal
-            simulationId={id || ""}
-            cnpj={simulation?.customer?.cnpj}
-            close={() => {
-              setCustomerModal(false);
-              loadSimulationById(id || "");
-            }}
-          />
-        )}
-
         {currencyModal && (
           <CurrencyModal
             simulationId={id || ""}
             close={() => {
               setCurrenciesModal(false);
+              loadSimulationById(id || "");
+            }}
+          />
+        )}
+        {internationalTransportModal && (
+          <InternationalTransportModal
+            simulationId={id || ""}
+            close={() => {
+              setInternationalTransportModal(false);
               loadSimulationById(id || "");
             }}
           />
@@ -66,6 +64,13 @@ export function Step02CurrenciesSimulationPage() {
             subtitle="Selecione as moedas"
             isActive
             onClick={() => setCurrenciesModal(true)}
+          />
+          <StepCard
+            icon={<Truck size={20} />}
+            title="Transporte internacional"
+            subtitle="Informe os dados"
+            isActive
+            onClick={() => setInternationalTransportModal(true)}
           />
           {/* <StepCard
             icon={<Buildings size={20} />}
