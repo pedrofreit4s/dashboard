@@ -76,7 +76,7 @@ export function useInternationalTransportForm(simulation?: ISimulation | null) {
   }, []);
 
   useEffect(() => {
-    if (simulation) {
+    if (simulation?.internationalTransports[0]) {
       setIsLoading(true);
 
       setModal({
