@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Coin } from "phosphor-react";
+import { Coin, Shield, Truck } from "phosphor-react";
 import { Container } from "../components/container";
 import { SimulationHead } from "../components/head";
 import { StepCard } from "../components/stepCard";
@@ -8,10 +8,12 @@ import { AnimatePresence } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
 import { useIsLoading } from "../hooks/useIsLoading";
 import { useSimulations } from "../hooks/useSimulations";
-import { CurrencyModal } from "../modals/currency";
+import { InternationalTransportModal } from "../modals/internationalTransport";
+import { InternationalInsuranceModal } from "../modals/internationalImsurance";
 
-export function Step02CurrenciesSimulationPage() {
-  const [currencyModal, setCurrenciesModal] = useState(false);
+export function Step03TransportsSimulationPage() {
+  const [internationalInsuranceModal, setInternationalInsuranceModal] = useState(false);
+  const [internationalTransportModal, setInternationalTransportModal] = useState(false);
 
   const { isLoading, setIsLoading } = useIsLoading();
   const { loadSimulationById, simulation } = useSimulations();
@@ -34,11 +36,20 @@ export function Step02CurrenciesSimulationPage() {
       />
 
       <AnimatePresence>
-        {currencyModal && (
-          <CurrencyModal
+        {internationalInsuranceModal && (
+          <InternationalInsuranceModal
             simulationId={id || ""}
             close={() => {
-              setCurrenciesModal(false);
+              setInternationalInsuranceModal(false);
+              loadSimulationById(id || "");
+            }}
+          />
+        )}
+        {internationalTransportModal && (
+          <InternationalTransportModal
+            simulationId={id || ""}
+            close={() => {
+              setInternationalTransportModal(false);
               loadSimulationById(id || "");
             }}
           />
@@ -48,20 +59,25 @@ export function Step02CurrenciesSimulationPage() {
       <Container>
         <div className="grid grid-cols-1 gap-3">
           <StepCard
-            icon={<Coin size={20} />}
-            title="Moedas e taxas"
-            subtitle="Selecione as moedas"
+            icon={<Truck size={20} />}
+            title="Transporte internacional"
+            subtitle="Informe os dados"
             isActive
-            onClick={() => setCurrenciesModal(true)}
+            onClick={() => setInternationalTransportModal(true)}
+          />
+          <StepCard
+            icon={<Shield size={20} />}
+            title="Seguro internacional"
+            subtitle="Selecione o seguro"
+            isActive
+            onClick={() => setInternationalInsuranceModal(true)}
           />
         </div>
         <div className="mt-8">
           <FinalActions
             confirmButtonText="Próximo"
             cancelButtonText="Voltar"
-            onConfirm={() => navigate(`/controle/simulacoes/${simulation?.id}/transportes`)}
-            onCancel={() => navigate(`/controle/simulacoes/${simulation?.id}`)}
-            confirmButtonIsActive
+            onCancel={() => navigate(`/controle/simulacoes/${simulation?.id}/moedas`)}
           />
         </div>
       </Container>
