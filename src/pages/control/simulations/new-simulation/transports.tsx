@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Coin, Shield, Truck } from "phosphor-react";
+import { Coin, Cube, Shield, Truck } from "phosphor-react";
 import { Container } from "../components/container";
 import { SimulationHead } from "../components/head";
 import { StepCard } from "../components/stepCard";
@@ -11,11 +11,13 @@ import { useSimulations } from "../hooks/useSimulations";
 import { InternationalTransportModal } from "../modals/internationalTransport";
 import { InternationalInsuranceModal } from "../modals/internationalImsurance";
 import { SiscomexRateModal } from "../modals/siscomexRateModal";
+import { IcmsDiscountModal } from "../modals/icmsDiscountModal";
 
 export function Step03TransportsSimulationPage() {
   const [internationalInsuranceModal, setInternationalInsuranceModal] = useState(false);
   const [internationalTransportModal, setInternationalTransportModal] = useState(false);
   const [siscomexRateModal, setSiscomexRateModal] = useState(false);
+  const [icmsDiscountModal, setIcmsDiscountModal] = useState(false);
 
   const { isLoading, setIsLoading } = useIsLoading();
   const { loadSimulationById, simulation } = useSimulations();
@@ -65,6 +67,15 @@ export function Step03TransportsSimulationPage() {
             }}
           />
         )}
+        {icmsDiscountModal && (
+          <IcmsDiscountModal
+            simulationId={id || ""}
+            close={() => {
+              setIcmsDiscountModal(false);
+              loadSimulationById(id || "");
+            }}
+          />
+        )}
       </AnimatePresence>
 
       <Container>
@@ -89,6 +100,13 @@ export function Step03TransportsSimulationPage() {
             subtitle="Selecione a taxa"
             isActive
             onClick={() => setSiscomexRateModal(true)}
+          />
+          <StepCard
+            icon={<Cube size={20} />}
+            title="Desconto de ICMS"
+            subtitle="Informe os dados"
+            isActive
+            onClick={() => setIcmsDiscountModal(true)}
           />
         </div>
         <div className="mt-8">

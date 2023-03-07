@@ -37,4 +37,12 @@ export interface ISimulation {
     created_at: Date;
     updated_at: Date;
   }[];
+  SimulationICMSDiscount: {
+    id: string;
+    normal: string;
+    camex: string;
+    simulationId: string;
+    created_at: Date;
+    updated_at: Date;
+  }[];
 }
