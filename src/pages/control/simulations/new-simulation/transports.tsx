@@ -10,10 +10,12 @@ import { useIsLoading } from "../hooks/useIsLoading";
 import { useSimulations } from "../hooks/useSimulations";
 import { InternationalTransportModal } from "../modals/internationalTransport";
 import { InternationalInsuranceModal } from "../modals/internationalImsurance";
+import { SiscomexRateModal } from "../modals/siscomexRateModal";
 
 export function Step03TransportsSimulationPage() {
   const [internationalInsuranceModal, setInternationalInsuranceModal] = useState(false);
   const [internationalTransportModal, setInternationalTransportModal] = useState(false);
+  const [siscomexRateModal, setSiscomexRateModal] = useState(false);
 
   const { isLoading, setIsLoading } = useIsLoading();
   const { loadSimulationById, simulation } = useSimulations();
@@ -54,6 +56,15 @@ export function Step03TransportsSimulationPage() {
             }}
           />
         )}
+        {siscomexRateModal && (
+          <SiscomexRateModal
+            simulationId={id || ""}
+            close={() => {
+              setSiscomexRateModal(false);
+              loadSimulationById(id || "");
+            }}
+          />
+        )}
       </AnimatePresence>
 
       <Container>
@@ -71,6 +82,13 @@ export function Step03TransportsSimulationPage() {
             subtitle="Selecione o seguro"
             isActive
             onClick={() => setInternationalInsuranceModal(true)}
+          />
+          <StepCard
+            icon={<Coin size={20} />}
+            title="Taxa siscomex"
+            subtitle="Selecione a taxa"
+            isActive
+            onClick={() => setSiscomexRateModal(true)}
           />
         </div>
         <div className="mt-8">

@@ -28,4 +28,13 @@ export interface ISimulation {
       updated_at: Date;
     };
   }[];
+  SimulationSixcomexRate: {
+    id: string;
+    quantidade_adicoes: number;
+    valor_moeda: string;
+    valor_brl: string;
+    simulationId: string;
+    created_at: Date;
+    updated_at: Date;
+  }[];
 }
